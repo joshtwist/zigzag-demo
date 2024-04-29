@@ -18,18 +18,41 @@
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos"
+              "rewritePattern": "${env.BASE_URL}/todos"
             }
           },
           "policies": {
             "inbound": [
-              "api-key-inbound",
+              "api-key",
               "custom-code-inbound",
               "rate-limit-inbound"
             ]
           }
         },
         "operationId": "43e14f03-13dd-4908-8c65-a84e37c2dc61"
+      }
+    },
+    "/foo": {
+      "x-zuplo-path": {
+        "pathMode": "open-api"
+      },
+      "get": {
+        "summary": "Foo",
+        "description": "Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do `eiusmod tempor` incididunt ut labore et dolore magna aliqua.",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(./modules/hello-world)",
+            "options": {}
+          },
+          "policies": {
+            "inbound": [
+              "custom-code-inbound-1"
+            ]
+          }
+        },
+        "operationId": "a385fa6b-6ae8-44b0-a57d-01ac14f55ecc"
       }
     }
   }

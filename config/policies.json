@@ -22,7 +22,7 @@
           "cacheTtlSeconds": 60
         }
       },
-      "name": "api-key-inbound",
+      "name": "api-key",
       "policyType": "api-key-inbound"
     },
     {
@@ -55,6 +55,25 @@
       },
       "name": "caching-inbound",
       "policyType": "caching-inbound"
+    },
+    {
+      "handler": {
+        "export": "OpenIdJwtInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "secret": "test"
+        }
+      },
+      "name": "jwt",
+      "policyType": "open-id-jwt-auth-inbound"
+    },
+    {
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/either-auth)"
+      },
+      "name": "custom-code-inbound-1",
+      "policyType": "custom-code-inbound"
     }
   ]
 }
